@@ -1,7 +1,7 @@
 package com.driver.services.impl;
 
-import com.driver.ParkingLot;
-import com.driver.Spot;
+import com.driver.model.ParkingLot;
+import com.driver.model.Spot;
 import com.driver.model.SpotType;
 import com.driver.repository.ParkingLotRepository;
 import com.driver.repository.SpotRepository;

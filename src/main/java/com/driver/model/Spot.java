@@ -1,4 +1,4 @@
-package com.driver;
+package com.driver.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.driver.model.SpotType;
 
 @Entity
 @Table

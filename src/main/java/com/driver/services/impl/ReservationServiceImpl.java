@@ -34,15 +34,15 @@ public class ReservationServiceImpl implements ReservationService {
     	Reservation reservation =new Reservation();
     	User user=userRepository3.findById(userId).get();
     	ParkingLot parkingLot=parkingLotRepository3.findById(parkingLotId).get();
-    	List<Spot> slots=parkingLot.getSpots();
-    	Collections.sort(slots,(a,b)-> a.getPriceperHour()-b.getPriceperHour());
+    	List<Spot> slots=parkingLot.getSpotList();
+    	Collections.sort(slots,(a,b)-> a.getPricePerHour()-b.getPricePerHour());
     	String a=numberOfWheels+"";
     	Spot slot=null;
     	for(Spot s: slots)
     	{
     		if(s.getSpotType().equals(a))
     		{
-    			if(!s.getOccupaid())
+    			if(!s.getOccupied())
     			{
     				slot=s;
     				slots.remove(slot);
@@ -55,10 +55,10 @@ public class ReservationServiceImpl implements ReservationService {
 			throw new Exception("Cannot make reservation");
 		}
     	
-    	slot.setOccupaid(true);
+    	slot.setOccupied(true);
     	slots.add(slot);
     	spotRepository3.save(slot);
-    	parkingLot.setSpots(slots);
+    	parkingLot.setSpotList(slots);
     	parkingLotRepository3.save(parkingLot);
     	reservation.setNumberOfHours(timeInHours);
     	reservation.setSpot(slot);

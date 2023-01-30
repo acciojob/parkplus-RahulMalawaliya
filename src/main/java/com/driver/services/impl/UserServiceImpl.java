@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     	user.setName(name);
     	user.setPassword(password);
     	user.setPhoneNumber(phoneNumber);
-    	user.setListReservations(reservations);
+    	user.setReservationList(reservations);
     	userRepository4.save(user);
     	
 

@@ -33,10 +33,10 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     public Spot addSpot(int parkingLotId, Integer numberOfWheels, Integer pricePerHour) {
     	
     	ParkingLot parkingLot=parkingLotRepository1.findById(parkingLotId).get();
-    	List<Spot> listspots=parkingLot.getSpots();
+    	List<Spot> listspots=parkingLot.getSpotList();
     	Spot spot=new Spot();
-    	spot.setOccupaid(true);
-    	spot.setPriceperHour(pricePerHour);
+    	spot.setOccupied(true);
+    	spot.setPricePerHour(pricePerHour);
     	switch(numberOfWheels)
     	{
     	case 2 : spot.setSpotType(SpotType.TWO_WHEELER);
@@ -51,7 +51,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     	
     	listspots.add(spot);
   
-    	parkingLot.setSpots(listspots);
+    	parkingLot.setSpotList(listspots);
     	
     	parkingLotRepository1.save(parkingLot);
     	spotRepository1.save(spot);
@@ -71,7 +71,7 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     public Spot updateSpot(int parkingLotId, int spotId, int pricePerHour) {
     	
     	ParkingLot parkingLot =parkingLotRepository1.findById(parkingLotId).get();
-    	List<Spot> listSpots=parkingLot.getSpots();
+    	List<Spot> listSpots=parkingLot.getSpotList();
     	Spot pot=null;
     	for(Spot spot:listSpots)
     	{
@@ -82,9 +82,9 @@ public class ParkingLotServiceImpl implements ParkingLotService {
     			break;
     		}
     	}
-    	pot.setPriceperHour(pricePerHour);
+    	pot.setPricePerHour(pricePerHour);
     	listSpots.add(pot);
-    	parkingLot.setSpots(listSpots);
+    	parkingLot.setSpotList(listSpots);
     	spotRepository1.save(pot);
     	parkingLotRepository1.save(parkingLot);
     	

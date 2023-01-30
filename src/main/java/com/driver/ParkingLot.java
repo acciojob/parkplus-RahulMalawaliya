@@ -1,11 +1,13 @@
 package com.driver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -14,62 +16,56 @@ import javax.persistence.Table;
 public class ParkingLot {
 	
 	
-	@javax.persistence.Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int Id;
-	
-	private String Name;
-	
-	private String Address;
-	
-	@OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
-	private List<Spot> spots;
+	 	@Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    private int id;
 
-	public int getId() {
-		return Id;
-	}
+	    private String name;
 
-	public void setId(int id) {
-		Id = id;
-	}
+	    private String address;
 
-	public String getName() {
-		return Name;
-	}
 
-	public void setName(String name) {
-		Name = name;
-	}
+	    public ParkingLot(String name, String address) {
+	        this.name = name;
+	        this.address = address;
+	    }
 
-	public String getAddress() {
-		return Address;
-	}
+	    public ParkingLot() {
+	    }
 
-	public void setAddress(String address) {
-		Address = address;
-	}
+	    @OneToMany(mappedBy = "parkingLot",cascade = CascadeType.ALL)
+	    private List<Spot> spotList=new ArrayList<>();
 
-	public List<Spot> getSpots() {
-		return spots;
-	}
 
-	public void setSpots(List<Spot> spots) {
-		this.spots = spots;
-	}
+	    public int getId() {
+	        return id;
+	    }
 
-	public ParkingLot(int id, String name, String address, List<Spot> spots) {
-		super();
-		Id = id;
-		Name = name;
-		Address = address;
-		this.spots = spots;
-	}
+	    public void setId(int id) {
+	        this.id = id;
+	    }
 
-	public ParkingLot() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
+	    public String getName() {
+	        return name;
+	    }
 
+	    public void setName(String name) {
+	        this.name = name;
+	    }
+
+	    public String getAddress() {
+	        return address;
+	    }
+
+	    public void setAddress(String address) {
+	        this.address = address;
+	    }
+
+	    public List<Spot> getSpotList() {
+	        return spotList;
+	    }
+
+	    public void setSpotList(List<Spot> spotList) {
+	        this.spotList = spotList;
+	    }
 }

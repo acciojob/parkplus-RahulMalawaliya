@@ -1,14 +1,18 @@
 package com.driver;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -17,88 +21,82 @@ import com.driver.model.SpotType;
 @Entity
 @Table
 public class Spot {
-	@javax.persistence.Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int Id;
-	
-	@Enumerated(EnumType.STRING)
-	private SpotType spotType;
-	
-	private int priceperHour;
-	
-	private Boolean Occupaid;
-	
-	@OneToMany
-	@JoinColumn
-	private ParkingLot parkingLot;
-	
-	@OneToMany(mappedBy = "spot",cascade = CascadeType.ALL)
-	private List<Reservation> reservations;
+	@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	public int getId() {
-		return Id;
-	}
+    @Enumerated(EnumType.STRING)
+    private SpotType spotType;
 
-	public void setId(int id) {
-		Id = id;
-	}
+    private int pricePerHour;
 
-	public SpotType getSpotType() {
-		return spotType;
-	}
+    @Column(columnDefinition = "TINYINT(1)")
+    private Boolean occupied;
 
-	public void setSpotType(SpotType spotType) {
-		this.spotType = spotType;
-	}
+    @ManyToOne
+    @JoinColumn
+    private ParkingLot parkingLot;
 
-	public int getPriceperHour() {
-		return priceperHour;
-	}
 
-	public void setPriceperHour(int priceperHour) {
-		this.priceperHour = priceperHour;
-	}
+    @OneToMany(mappedBy = "spot",cascade = CascadeType.ALL)
+    private List<Reservation> reservationList=new ArrayList<>();
 
-	public Boolean getOccupaid() {
-		return Occupaid;
-	}
 
-	public void setOccupaid(Boolean occupaid) {
-		Occupaid = occupaid;
-	}
+    public Spot(SpotType spotType, int pricePerHour) {
+        this.spotType = spotType;
+        this.pricePerHour = pricePerHour;
+        this.occupied=false;
+    }
 
-	public ParkingLot getParkingLot() {
-		return parkingLot;
-	}
+    public Spot() {
+        this.occupied=false;
+    }
 
-	public void setParkingLot(ParkingLot parkingLot) {
-		this.parkingLot = parkingLot;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public List<Reservation> getReservations() {
-		return reservations;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setReservations(List<Reservation> reservations) {
-		this.reservations = reservations;
-	}
+    public SpotType getSpotType() {
+        return spotType;
+    }
 
-	public Spot(int id, SpotType spotType, int priceperHour, Boolean occupaid, ParkingLot parkingLot,
-			List<Reservation> reservations) {
-		super();
-		Id = id;
-		this.spotType = spotType;
-		this.priceperHour = priceperHour;
-		Occupaid = occupaid;
-		this.parkingLot = parkingLot;
-		this.reservations = reservations;
-	}
+    public void setSpotType(SpotType spotType) {
+        this.spotType = spotType;
+    }
 
-	public Spot() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	
-	
+    public int getPricePerHour() {
+        return pricePerHour;
+    }
 
+    public void setPricePerHour(int pricePerHour) {
+        this.pricePerHour = pricePerHour;
+    }
+
+    public Boolean getOccupied() {
+        return occupied;
+    }
+
+    public void setOccupied(Boolean occupied) {
+        this.occupied = occupied;
+    }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
+    }
+
+    public void setParkingLot(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
+    }
+
+    public List<Reservation> getReservationList() {
+        return reservationList;
+    }
+
+    public void setReservationList(List<Reservation> reservationList) {
+        this.reservationList = reservationList;
+    }
 }

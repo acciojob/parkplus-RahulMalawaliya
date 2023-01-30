@@ -58,6 +58,7 @@ public class ReservationServiceImpl implements ReservationService {
     	slot.setOccupaid(true);
     	spotRepository3.save(slot);
     	parkingLotRepository3.save(parkingLot);
+		return null;
     	
     }
 }

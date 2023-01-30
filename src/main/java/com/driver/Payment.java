@@ -18,13 +18,15 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	private boolean paymentcomplete;
+	private boolean PaymentCompleted;
 	
 	@Enumerated(EnumType.STRING)
 	private PaymentMode paymentMode;
 	
 	@OneToOne(mappedBy = "payment",cascade = CascadeType.ALL)
 	private Reservation reservations;
+
+	private boolean paymentcomplete;
 
 	public int getId() {
 		return id;
@@ -38,7 +40,7 @@ public class Payment {
 		return paymentcomplete;
 	}
 
-	public void setPaymentcomplete(boolean paymentcomplete) {
+	public void setPaymentCompleted(boolean paymentcomplete) {
 		this.paymentcomplete = paymentcomplete;
 	}
 

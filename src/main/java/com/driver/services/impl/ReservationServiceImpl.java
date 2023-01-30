@@ -31,9 +31,8 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Reservation reserveSpot(Integer userId, Integer parkingLotId, Integer timeInHours, Integer numberOfWheels) throws Exception {
     	
-    	
+    	Reservation reservation =new Reservation();
     	User user=userRepository3.findById(userId).get();
-    	
     	ParkingLot parkingLot=parkingLotRepository3.findById(parkingLotId).get();
     	List<Spot> slots=parkingLot.getSpots();
     	Collections.sort(slots,(a,b)-> a.getPriceperHour()-b.getPriceperHour());
@@ -46,6 +45,7 @@ public class ReservationServiceImpl implements ReservationService {
     			if(!s.getOccupaid())
     			{
     				slot=s;
+    				slots.remove(slot);
     				break;
     			}
     		}
@@ -56,9 +56,14 @@ public class ReservationServiceImpl implements ReservationService {
 		}
     	
     	slot.setOccupaid(true);
+    	slots.add(slot);
     	spotRepository3.save(slot);
+    	parkingLot.setSpots(slots);
     	parkingLotRepository3.save(parkingLot);
-		return null;
+    	reservation.setNumberOfHours(timeInHours);
+    	reservation.setSpot(slot);
+    	reservation.setUser(user);
+		return reservation;
     	
     }
 }
